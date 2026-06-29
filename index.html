@@ -1,0 +1,1264 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LUXE STEP — Calzado Premium</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink:     #1A1714;
+      --sand:    #E8E0D5;
+      --cream:   #F5F1EB;
+      --bronze:  #9B7B4F;
+      --warm:    #C4A882;
+      --muted:   #7A6E64;
+      --white:   #FDFCFA;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--white);
+      color: var(--ink);
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.4rem 4rem;
+      background: rgba(253,252,250,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(155,123,79,0.15);
+      transition: box-shadow 0.3s;
+    }
+    nav.scrolled { box-shadow: 0 2px 30px rgba(26,23,20,0.08); }
+
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      letter-spacing: 0.25em;
+      color: var(--ink);
+      text-decoration: none;
+    }
+    .nav-logo span { color: var(--bronze); }
+
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      font-size: 0.78rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--bronze); }
+
+    .nav-cta {
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.65rem 1.6rem;
+      border: 1px solid var(--bronze);
+      color: var(--bronze);
+      text-decoration: none;
+      transition: background 0.25s, color 0.25s;
+    }
+    .nav-cta:hover { background: var(--bronze); color: var(--white); }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      padding-top: 80px;
+    }
+
+    .hero-left {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 6rem 5rem 6rem 7rem;
+      position: relative;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.7rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--bronze);
+      margin-bottom: 1.8rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      display: inline-block;
+      width: 40px;
+      height: 1px;
+      background: var(--bronze);
+    }
+
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3.5rem, 6vw, 5.5rem);
+      font-weight: 300;
+      line-height: 1.05;
+      color: var(--ink);
+      margin-bottom: 2rem;
+    }
+    .hero-title em {
+      font-style: italic;
+      color: var(--bronze);
+    }
+
+    .hero-desc {
+      font-size: 0.95rem;
+      line-height: 1.75;
+      color: var(--muted);
+      max-width: 380px;
+      margin-bottom: 3rem;
+    }
+
+    .hero-actions { display: flex; gap: 1.2rem; align-items: center; }
+
+    .btn-primary {
+      display: inline-block;
+      padding: 1rem 2.4rem;
+      background: var(--ink);
+      color: var(--white);
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: background 0.25s;
+    }
+    .btn-primary:hover { background: var(--bronze); }
+
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .btn-ghost:hover { color: var(--bronze); }
+    .btn-ghost span { font-size: 1.1rem; }
+
+    .hero-stats {
+      position: absolute;
+      bottom: 4rem;
+      left: 7rem;
+      display: flex;
+      gap: 3rem;
+    }
+    .stat-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.2rem;
+      font-weight: 300;
+      color: var(--ink);
+      display: block;
+    }
+    .stat-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .hero-right {
+      background: var(--sand);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Hero visual — elegant shoe illustration */
+    .hero-visual {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    .hero-shoe-wrapper {
+      position: relative;
+      z-index: 2;
+    }
+    .hero-shoe-wrapper svg {
+      width: 380px;
+      height: auto;
+      filter: drop-shadow(0 40px 60px rgba(26,23,20,0.18));
+      animation: float 6s ease-in-out infinite;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-18px); }
+    }
+
+    .hero-circle {
+      position: absolute;
+      width: 420px; height: 420px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(196,168,130,0.3) 0%, transparent 70%);
+      top: 50%; left: 50%;
+      transform: translate(-50%,-50%);
+    }
+
+    .hero-tag {
+      position: absolute;
+      bottom: 3rem; right: 3rem;
+      background: var(--white);
+      padding: 1.2rem 1.5rem;
+      box-shadow: 0 10px 40px rgba(26,23,20,0.1);
+    }
+    .hero-tag-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--ink);
+    }
+    .hero-tag-price {
+      font-size: 0.8rem;
+      color: var(--bronze);
+      margin-top: 0.2rem;
+    }
+
+    /* ── MARQUEE ── */
+    .marquee-bar {
+      background: var(--ink);
+      padding: 1rem 0;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    .marquee-track {
+      display: inline-flex;
+      animation: marquee 18s linear infinite;
+    }
+    .marquee-item {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--warm);
+      margin: 0 2.5rem;
+    }
+    .marquee-dot {
+      color: var(--bronze);
+      margin: 0 1rem;
+    }
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    /* ── COLECCIONES ── */
+    #colecciones {
+      padding: 7rem 7rem 5rem;
+      background: var(--white);
+    }
+    .section-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 3.5rem;
+    }
+    .section-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--bronze);
+      display: block;
+      margin-bottom: 0.7rem;
+    }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      font-weight: 300;
+      line-height: 1.1;
+      color: var(--ink);
+    }
+    .section-link {
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: color 0.2s;
+      padding-bottom: 0.3rem;
+    }
+    .section-link:hover { color: var(--bronze); }
+
+    .collections-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 1.2rem;
+      height: 520px;
+    }
+
+    .col-card {
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .col-card-bg {
+      width: 100%; height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.6s ease;
+    }
+    .col-card:hover .col-card-bg { transform: scale(1.04); }
+
+    .col-card-info {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 1.8rem;
+      background: linear-gradient(to top, rgba(26,23,20,0.75) 0%, transparent 100%);
+      color: var(--white);
+    }
+    .col-card-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 400;
+      margin-bottom: 0.3rem;
+    }
+    .col-card-count {
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.7);
+    }
+
+    .col-bg-1 { background: #D4C8B8; }
+    .col-bg-2 { background: #C8B9A5; }
+    .col-bg-3 { background: #B8A898; }
+
+    /* ── PRODUCTOS DESTACADOS ── */
+    #productos {
+      padding: 5rem 7rem 7rem;
+      background: var(--cream);
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+      margin-top: 3.5rem;
+    }
+
+    .product-card {
+      background: var(--white);
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .product-card:hover .product-img-wrap img-placeholder { transform: scale(1.05); }
+
+    .product-tag-badge {
+      position: absolute;
+      top: 1rem; left: 1rem;
+      background: var(--ink);
+      color: var(--white);
+      font-size: 0.6rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.6rem;
+      z-index: 2;
+    }
+    .product-tag-badge.sale { background: var(--bronze); }
+
+    .product-img-wrap {
+      height: 280px;
+      background: var(--sand);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      transition: transform 0.5s ease;
+    }
+    .product-card:hover .product-img-wrap { transform: scale(1.03); }
+
+    .product-img-wrap svg {
+      width: 180px;
+      height: auto;
+      transition: transform 0.5s ease;
+    }
+    .product-card:hover .product-img-wrap svg { transform: rotate(-5deg) translateY(-6px); }
+
+    .product-info {
+      padding: 1.4rem 1.4rem 1.8rem;
+    }
+    .product-brand {
+      font-size: 0.62rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--bronze);
+      margin-bottom: 0.3rem;
+    }
+    .product-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem;
+      font-weight: 400;
+      color: var(--ink);
+      margin-bottom: 0.8rem;
+    }
+    .product-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .product-price {
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--ink);
+    }
+    .product-price .old {
+      font-size: 0.78rem;
+      font-weight: 300;
+      color: var(--muted);
+      text-decoration: line-through;
+      margin-right: 0.4rem;
+    }
+    .add-btn {
+      width: 34px; height: 34px;
+      border: 1px solid var(--sand);
+      background: transparent;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1.1rem;
+      color: var(--ink);
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .add-btn:hover { background: var(--ink); color: var(--white); border-color: var(--ink); }
+
+    /* ── BRAND STRIP ── */
+    #marcas {
+      padding: 4rem 7rem;
+      border-top: 1px solid var(--sand);
+      border-bottom: 1px solid var(--sand);
+    }
+    .marcas-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 3rem;
+    }
+    .marca-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      font-weight: 300;
+      letter-spacing: 0.15em;
+      color: var(--sand);
+      transition: color 0.2s;
+      cursor: default;
+      white-space: nowrap;
+    }
+    .marca-name:hover { color: var(--bronze); }
+
+    /* ── ABOUT / FILOSOFÍA ── */
+    #filosofia {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 60vh;
+    }
+    .filo-left {
+      background: var(--ink);
+      padding: 7rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .filo-left .section-label { color: var(--warm); }
+    .filo-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      font-weight: 300;
+      color: var(--white);
+      margin-bottom: 2rem;
+      line-height: 1.15;
+    }
+    .filo-title em { color: var(--warm); font-style: italic; }
+    .filo-body {
+      font-size: 0.92rem;
+      line-height: 1.85;
+      color: rgba(245,241,235,0.65);
+      margin-bottom: 2.5rem;
+      max-width: 420px;
+    }
+    .filo-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.8rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--warm);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(196,168,130,0.4);
+      padding-bottom: 0.3rem;
+      transition: border-color 0.2s;
+    }
+    .filo-link:hover { border-color: var(--warm); }
+
+    .filo-right {
+      background: var(--bronze);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .filo-pattern {
+      position: absolute;
+      inset: 0;
+      opacity: 0.12;
+      background-image: repeating-linear-gradient(
+        45deg,
+        var(--ink) 0px,
+        var(--ink) 1px,
+        transparent 1px,
+        transparent 20px
+      );
+    }
+    .filo-numbers {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      padding: 4rem;
+    }
+    .filo-num {
+      text-align: center;
+    }
+    .filo-num .big {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3.5rem;
+      font-weight: 300;
+      color: var(--white);
+      display: block;
+      line-height: 1;
+    }
+    .filo-num .small {
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.7);
+      margin-top: 0.4rem;
+      display: block;
+    }
+
+    /* ── TESTIMONIOS ── */
+    #testimonios {
+      padding: 7rem;
+      background: var(--white);
+      text-align: center;
+    }
+    .testimonios-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-top: 4rem;
+      text-align: left;
+    }
+    .testi-card {
+      padding: 2.5rem;
+      background: var(--cream);
+      border-left: 2px solid var(--warm);
+    }
+    .testi-stars {
+      color: var(--bronze);
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
+      margin-bottom: 1.2rem;
+    }
+    .testi-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      font-weight: 400;
+      font-style: italic;
+      line-height: 1.65;
+      color: var(--ink);
+      margin-bottom: 1.5rem;
+    }
+    .testi-author {
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ── NEWSLETTER ── */
+    #newsletter {
+      background: var(--sand);
+      padding: 5rem 7rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+    .newsletter-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 3vw, 2.8rem);
+      font-weight: 300;
+      color: var(--ink);
+      line-height: 1.15;
+    }
+    .newsletter-title em { font-style: italic; color: var(--bronze); }
+    .newsletter-sub {
+      font-size: 0.88rem;
+      color: var(--muted);
+      margin-top: 0.8rem;
+      line-height: 1.7;
+    }
+    .newsletter-form {
+      display: flex;
+      gap: 0;
+    }
+    .newsletter-input {
+      flex: 1;
+      padding: 1rem 1.4rem;
+      background: var(--white);
+      border: 1px solid rgba(155,123,79,0.3);
+      border-right: none;
+      font-size: 0.85rem;
+      font-family: 'DM Sans', sans-serif;
+      color: var(--ink);
+      outline: none;
+    }
+    .newsletter-input::placeholder { color: var(--muted); }
+    .newsletter-btn {
+      padding: 1rem 2rem;
+      background: var(--bronze);
+      border: 1px solid var(--bronze);
+      color: var(--white);
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      transition: background 0.2s;
+      white-space: nowrap;
+    }
+    .newsletter-btn:hover { background: var(--ink); border-color: var(--ink); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--ink);
+      padding: 5rem 7rem 3rem;
+      color: rgba(245,241,235,0.55);
+    }
+    .footer-top {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 4rem;
+      margin-bottom: 4rem;
+    }
+    .footer-brand {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      color: var(--white);
+      margin-bottom: 1rem;
+    }
+    .footer-brand span { color: var(--warm); }
+    .footer-desc {
+      font-size: 0.82rem;
+      line-height: 1.8;
+      max-width: 260px;
+    }
+    .footer-col h4 {
+      font-size: 0.65rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--warm);
+      margin-bottom: 1.5rem;
+    }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.7rem; }
+    .footer-col ul a {
+      font-size: 0.83rem;
+      color: rgba(245,241,235,0.55);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-col ul a:hover { color: var(--warm); }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(245,241,235,0.1);
+      padding-top: 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.72rem;
+    }
+    .footer-social { display: flex; gap: 1.5rem; }
+    .footer-social a {
+      color: rgba(245,241,235,0.4);
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-social a:hover { color: var(--warm); }
+
+    /* ── SVGs inline ── */
+    .shoe-svg { display: block; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1100px) {
+      nav { padding: 1.2rem 2.5rem; }
+      #hero { grid-template-columns: 1fr; }
+      .hero-left { padding: 6rem 3rem 3rem; }
+      .hero-stats { left: 3rem; }
+      .hero-right { height: 50vh; }
+      #colecciones, #productos { padding: 5rem 3rem; }
+      .collections-grid { grid-template-columns: 1fr 1fr; height: auto; }
+      .collections-grid .col-card:first-child { grid-column: 1/-1; height: 300px; }
+      .collections-grid .col-card:not(:first-child) { height: 220px; }
+      .products-grid { grid-template-columns: repeat(2, 1fr); }
+      #marcas { padding: 3rem; }
+      .marcas-inner { flex-wrap: wrap; justify-content: center; gap: 1.5rem; }
+      #filosofia { grid-template-columns: 1fr; }
+      .filo-left { padding: 5rem 3rem; }
+      #testimonios { padding: 5rem 3rem; }
+      .testimonios-grid { grid-template-columns: 1fr; }
+      #newsletter { grid-template-columns: 1fr; gap: 2rem; padding: 4rem 3rem; }
+      footer { padding: 4rem 3rem 2rem; }
+      .footer-top { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+    }
+
+    @media (max-width: 600px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      .hero-left { padding: 5rem 1.5rem 2rem; }
+      .hero-stats { left: 1.5rem; bottom: 2rem; gap: 2rem; }
+      .hero-shoe-wrapper svg { width: 260px; }
+      .hero-tag { bottom: 1.5rem; right: 1.5rem; }
+      #colecciones, #productos { padding: 4rem 1.5rem; }
+      .filo-left { padding: 4rem 1.5rem; }
+      .filo-numbers { grid-template-columns: 1fr 1fr; gap: 2rem; padding: 3rem 2rem; }
+      #testimonios, #newsletter, footer { padding: 4rem 1.5rem 3rem; }
+      .footer-top { grid-template-columns: 1fr; }
+      .newsletter-form { flex-direction: column; }
+      .newsletter-input { border-right: 1px solid rgba(155,123,79,0.3); border-bottom: none; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hero-shoe-wrapper svg { animation: none; }
+      .marquee-track { animation: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="navbar">
+    <a href="#" class="nav-logo">LUXE<span>.</span>STEP</a>
+    <ul class="nav-links">
+      <li><a href="#colecciones">Colecciones</a></li>
+      <li><a href="#productos">Tienda</a></li>
+      <li><a href="#filosofia">Nosotros</a></li>
+      <li><a href="#testimonios">Reseñas</a></li>
+    </ul>
+    <a href="#productos" class="nav-cta">Ver Tienda</a>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-left">
+      <p class="hero-eyebrow">Colección Primavera 2026</p>
+      <h1 class="hero-title">
+        Cada paso,<br />
+        una obra<br />
+        <em>de arte.</em>
+      </h1>
+      <p class="hero-desc">
+        Calzado de autor para quienes entienden que la elegancia no es un lujo, es una actitud. Cuero genuino, artesanía italiana, diseño sin tiempo.
+      </p>
+      <div class="hero-actions">
+        <a href="#colecciones" class="btn-primary">Explorar Colección</a>
+        <a href="#filosofia" class="btn-ghost"><span>▸</span> Nuestra historia</a>
+      </div>
+      <div class="hero-stats">
+        <div>
+          <span class="stat-num">1.2K+</span>
+          <span class="stat-label">Clientes felices</span>
+        </div>
+        <div>
+          <span class="stat-num">8</span>
+          <span class="stat-label">Años de tradición</span>
+        </div>
+        <div>
+          <span class="stat-num">100%</span>
+          <span class="stat-label">Cuero genuino</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <div class="hero-visual">
+        <div class="hero-circle"></div>
+        <div class="hero-shoe-wrapper">
+          <!-- Elegant heeled shoe SVG -->
+          <svg class="shoe-svg" viewBox="0 0 400 260" xmlns="http://www.w3.org/2000/svg" aria-label="Zapato de tacón elegante">
+            <!-- Shadow -->
+            <ellipse cx="200" cy="248" rx="120" ry="10" fill="rgba(26,23,20,0.12)"/>
+            <!-- Heel -->
+            <path d="M 260 200 L 270 240 L 282 240 L 278 200 Z" fill="#5C4033" />
+            <!-- Sole -->
+            <path d="M 60 210 Q 100 215 160 212 Q 200 210 260 210 Q 278 200 278 200 L 278 218 Q 260 222 200 220 Q 140 220 100 222 Q 70 224 60 220 Z" fill="#3D2B1F"/>
+            <!-- Main shoe body -->
+            <path d="M 65 215 Q 90 190 130 175 Q 170 162 220 160 Q 260 158 290 150 Q 310 144 320 138 Q 325 132 318 128 Q 305 130 285 138 Q 255 148 210 152 Q 165 156 130 168 Q 95 180 70 200 Z" fill="#8B5E3C"/>
+            <!-- Toe box -->
+            <path d="M 65 215 Q 62 208 60 200 Q 58 188 65 180 Q 75 172 90 172 Q 105 172 120 178 Q 140 186 130 175 Q 90 190 70 200 Z" fill="#7A5230"/>
+            <!-- Vamp / top -->
+            <path d="M 130 175 Q 170 160 220 158 Q 260 156 295 145 Q 315 138 318 128 Q 310 118 295 118 Q 265 120 240 130 Q 210 142 185 148 Q 155 156 130 165 Z" fill="#9B6B47"/>
+            <!-- Highlight -->
+            <path d="M 140 168 Q 190 152 240 140 Q 280 130 310 122 Q 305 116 295 116 Q 265 118 240 128 Q 200 142 165 150 Q 145 156 138 162 Z" fill="rgba(255,255,255,0.15)" />
+            <!-- Strap -->
+            <path d="M 160 162 Q 165 145 180 140 Q 195 135 200 138 Q 185 145 185 152 Q 180 158 170 162 Z" fill="#7A5230"/>
+            <!-- Buckle -->
+            <rect x="178" y="136" width="10" height="7" rx="1" fill="#C4A000"/>
+            <rect x="180" y="137.5" width="6" height="4" rx="0.5" fill="none" stroke="#9B7B00" stroke-width="0.7"/>
+          </svg>
+        </div>
+      </div>
+      <div class="hero-tag">
+        <div class="hero-tag-name">Florentine Heel</div>
+        <div class="hero-tag-price">Desde $320.000 COP</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee-bar" aria-hidden="true">
+    <div class="marquee-track">
+      <span class="marquee-item">Cuero Genuino</span><span class="marquee-dot">◆</span>
+      <span class="marquee-item">Envío a todo el país</span><span class="marquee-dot">◆</span>
+      <span class="marquee-item">Garantía 12 meses</span><span class="marquee-dot">◆</span>
+      <span class="marquee-item">Artesanía Premium</span><span class="marquee-dot">◆</span>
+      <span class="marquee-item">Tallas del 34 al 44</span><span class="marquee-dot">◆</span>
+      <span class="marquee-item">Cambios gratis</span><span class="marquee-dot">◆</span>
+      <span class="marquee-item">Cuero Genuino</span><span class="marquee-dot">◆</span>
+      <span class="marquee-item">Envío a todo el país</span><span class="marquee-dot">◆</span>
+      <span class="marquee-item">Garantía 12 meses</span><span class="marquee-dot">◆</span>
+      <span class="marquee-item">Artesanía Premium</span><span class="marquee-dot">◆</span>
+      <span class="marquee-item">Tallas del 34 al 44</span><span class="marquee-dot">◆</span>
+      <span class="marquee-item">Cambios gratis</span><span class="marquee-dot">◆</span>
+    </div>
+  </div>
+
+  <!-- COLECCIONES -->
+  <section id="colecciones">
+    <div class="section-header">
+      <div>
+        <span class="section-label">Categorías</span>
+        <h2 class="section-title">Nuestras<br/>Colecciones</h2>
+      </div>
+      <a href="#" class="section-link">Ver todas →</a>
+    </div>
+    <div class="collections-grid">
+      <div class="col-card">
+        <div class="col-card-bg col-bg-1" style="height:100%;">
+          <svg viewBox="0 0 300 200" width="260" style="opacity:0.7" xmlns="http://www.w3.org/2000/svg">
+            <!-- Classic oxford shoe -->
+            <ellipse cx="150" cy="188" rx="100" ry="8" fill="rgba(26,23,20,0.15)"/>
+            <path d="M 50 175 Q 70 155 110 145 Q 150 137 195 138 Q 225 139 245 130 Q 255 124 248 118 Q 235 120 210 130 Q 175 140 140 142 Q 100 144 70 158 Z" fill="#5C3A1E"/>
+            <path d="M 50 175 Q 47 165 48 155 Q 52 142 65 138 Q 82 134 100 140 Q 115 146 110 145 Q 70 157 55 168 Z" fill="#4A2E18"/>
+            <path d="M 112 143 Q 150 135 200 136 Q 230 136 248 126 Q 255 120 248 116 Q 232 112 205 122 Q 170 134 135 138 Z" fill="#6B4420"/>
+            <path d="M 120 140 Q 160 130 205 128 Q 235 126 248 118 Q 240 112 225 112 Q 195 114 165 126 Q 140 135 125 138 Z" fill="rgba(255,255,255,0.12)"/>
+            <!-- Laces -->
+            <line x1="140" y1="140" x2="145" y2="128" stroke="#C4A882" stroke-width="1.5"/>
+            <line x1="155" y1="138" x2="158" y2="126" stroke="#C4A882" stroke-width="1.5"/>
+            <line x1="170" y1="136" x2="172" y2="124" stroke="#C4A882" stroke-width="1.5"/>
+            <path d="M 140 128 Q 152 124 158 126" stroke="#C4A882" stroke-width="1.2" fill="none"/>
+            <path d="M 155 126 Q 163 122 172 124" stroke="#C4A882" stroke-width="1.2" fill="none"/>
+            <!-- Sole -->
+            <path d="M 50 175 Q 80 180 130 178 Q 175 176 225 174 Q 245 170 250 165 L 248 174 Q 225 180 175 182 Q 120 184 75 182 Q 55 180 50 176 Z" fill="#3D2B1F"/>
+          </svg>
+        </div>
+        <div class="col-card-info">
+          <div class="col-card-name">Clásicos Oxford</div>
+          <div class="col-card-count">42 estilos</div>
+        </div>
+      </div>
+
+      <div class="col-card">
+        <div class="col-card-bg col-bg-2" style="height: 250px;">
+          <svg viewBox="0 0 220 180" width="160" style="opacity:0.75" xmlns="http://www.w3.org/2000/svg">
+            <!-- Sneaker -->
+            <ellipse cx="110" cy="168" rx="85" ry="7" fill="rgba(26,23,20,0.12)"/>
+            <path d="M 30 148 Q 50 130 90 120 Q 125 112 165 115 Q 185 118 192 110 Q 188 104 170 108 Q 140 114 110 116 Q 75 118 50 128 Z" fill="#8B7355"/>
+            <path d="M 30 148 Q 27 138 30 128 Q 35 118 48 115 Q 60 112 72 118 Q 80 124 75 126 Q 55 132 38 142 Z" fill="#7A6245"/>
+            <rect x="30" y="150" width="165" height="14" rx="4" fill="#E8E0D5"/>
+            <rect x="30" y="155" width="165" height="9" rx="2" fill="#D4C8B8"/>
+            <!-- Swoosh-like stripe -->
+            <path d="M 70 138 Q 110 128 155 122 Q 180 118 192 112" stroke="rgba(255,255,255,0.5)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="col-card-info">
+          <div class="col-card-name">Urbanos</div>
+          <div class="col-card-count">28 estilos</div>
+        </div>
+      </div>
+
+      <div class="col-card">
+        <div class="col-card-bg col-bg-3" style="height: 250px;">
+          <svg viewBox="0 0 220 200" width="150" style="opacity:0.75" xmlns="http://www.w3.org/2000/svg">
+            <!-- Boot -->
+            <ellipse cx="110" cy="188" rx="72" ry="7" fill="rgba(26,23,20,0.15)"/>
+            <!-- Shaft -->
+            <rect x="75" y="60" width="65" height="108" rx="4" fill="#5C3A1E"/>
+            <rect x="80" y="65" width="55" height="100" rx="3" fill="#6B4420"/>
+            <!-- Boot top -->
+            <path d="M 75 60 Q 107 55 140 60 L 138 70 Q 107 65 77 70 Z" fill="#7A5230"/>
+            <!-- Toe -->
+            <path d="M 75 168 Q 50 165 42 172 Q 38 180 50 184 Q 72 188 110 188 Q 140 188 152 184 Q 165 180 165 172 Q 165 168 155 168 Z" fill="#4A2E18"/>
+            <!-- Sole -->
+            <path d="M 42 180 Q 75 184 110 184 Q 150 184 165 180 L 165 186 Q 150 190 110 190 Q 70 190 42 186 Z" fill="#3D2B1F"/>
+            <!-- Lace detail -->
+            <line x1="90" y1="80" x2="125" y2="80" stroke="rgba(196,168,130,0.5)" stroke-width="1.5"/>
+            <line x1="90" y1="95" x2="125" y2="95" stroke="rgba(196,168,130,0.5)" stroke-width="1.5"/>
+            <line x1="90" y1="110" x2="125" y2="110" stroke="rgba(196,168,130,0.5)" stroke-width="1.5"/>
+            <line x1="90" y1="125" x2="125" y2="125" stroke="rgba(196,168,130,0.5)" stroke-width="1.5"/>
+          </svg>
+        </div>
+        <div class="col-card-info">
+          <div class="col-card-name">Botines</div>
+          <div class="col-card-count">18 estilos</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUCTOS DESTACADOS -->
+  <section id="productos">
+    <div class="section-header">
+      <div>
+        <span class="section-label">Lo más buscado</span>
+        <h2 class="section-title">Destacados<br/>de Temporada</h2>
+      </div>
+      <a href="#" class="section-link">Ver catálogo →</a>
+    </div>
+
+    <div class="products-grid">
+      <!-- Producto 1 -->
+      <div class="product-card">
+        <div class="product-tag-badge">Nuevo</div>
+        <div class="product-img-wrap">
+          <svg viewBox="0 0 200 140" xmlns="http://www.w3.org/2000/svg">
+            <ellipse cx="100" cy="132" rx="75" ry="6" fill="rgba(26,23,20,0.1)"/>
+            <path d="M 28 115 Q 45 95 80 85 Q 115 77 148 80 Q 168 82 178 74 Q 172 68 155 72 Q 125 78 95 82 Q 62 86 38 100 Z" fill="#8B5E3C"/>
+            <path d="M 28 115 Q 25 105 27 95 Q 32 83 46 80 Q 60 77 72 84 Q 80 90 80 85 Q 45 97 32 108 Z" fill="#7A5230"/>
+            <path d="M 80 84 Q 115 75 150 78 Q 170 80 178 72 Q 170 62 150 66 Q 118 70 90 78 Z" fill="#9B6B47"/>
+            <path d="M 28 115 Q 60 120 100 118 Q 140 116 172 112 Q 182 108 178 104 L 176 112 Q 155 118 110 120 Q 65 122 35 120 Z" fill="#3D2B1F"/>
+            <!-- Ornament -->
+            <circle cx="65" cy="90" r="5" fill="#C4A000" opacity="0.9"/>
+            <circle cx="65" cy="90" r="3" fill="none" stroke="#9B7B00" stroke-width="0.8"/>
+          </svg>
+        </div>
+        <div class="product-info">
+          <p class="product-brand">Luxe Step</p>
+          <h3 class="product-name">Mocasín Milán</h3>
+          <div class="product-footer">
+            <span class="product-price">$289.000</span>
+            <button class="add-btn" aria-label="Agregar al carrito">+</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Producto 2 -->
+      <div class="product-card">
+        <div class="product-tag-badge sale">Oferta</div>
+        <div class="product-img-wrap" style="background: #D8CFCA;">
+          <svg viewBox="0 0 200 160" xmlns="http://www.w3.org/2000/svg">
+            <!-- Stiletto -->
+            <ellipse cx="100" cy="152" rx="70" ry="6" fill="rgba(26,23,20,0.12)"/>
+            <path d="M 155 125 L 162 146 L 170 146 L 166 125 Z" fill="#3D2B1F"/>
+            <path d="M 35 130 Q 55 112 85 103 Q 115 95 145 96 Q 158 97 165 128" fill="none"/>
+            <path d="M 35 132 Q 58 115 90 105 Q 122 96 150 96 Q 163 95 168 105 Q 170 118 165 125 Q 155 118 138 112 Q 115 106 88 110 Q 65 114 48 125 Z" fill="#9B3A5C"/>
+            <path d="M 35 132 Q 32 122 34 112 Q 38 100 52 97 Q 66 94 76 100 Q 84 106 80 106 Q 58 112 44 122 Z" fill="#8B2E50"/>
+            <path d="M 80 106 Q 115 98 148 98 Q 163 98 168 108 Q 160 112 145 110 Q 115 108 88 112 Z" fill="#B04A6A"/>
+            <path d="M 35 132 Q 65 136 100 134 Q 135 132 158 128 Q 165 126 165 126 L 164 133 Q 148 136 110 138 Q 68 140 40 136 Z" fill="#2D1B14"/>
+          </svg>
+        </div>
+        <div class="product-info">
+          <p class="product-brand">Luxe Step</p>
+          <h3 class="product-name">Stiletto Roma</h3>
+          <div class="product-footer">
+            <span class="product-price"><span class="old">$380.000</span>$295.000</span>
+            <button class="add-btn" aria-label="Agregar al carrito">+</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Producto 3 -->
+      <div class="product-card">
+        <div class="product-img-wrap" style="background:#C8BFB5;">
+          <svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg">
+            <!-- Derby shoe -->
+            <ellipse cx="100" cy="142" rx="72" ry="6" fill="rgba(26,23,20,0.12)"/>
+            <path d="M 30 118 Q 48 100 82 90 Q 116 82 152 84 Q 170 85 178 78 Q 172 70 154 74 Q 122 80 90 84 Q 58 88 38 102 Z" fill="#4A3728"/>
+            <path d="M 30 118 Q 27 108 30 98 Q 34 86 48 83 Q 62 80 74 87 Q 82 93 78 92 Q 55 100 40 110 Z" fill="#3D2B1F"/>
+            <path d="M 78 91 Q 115 82 154 82 Q 172 82 178 74 Q 170 64 150 68 Q 118 74 92 82 Z" fill="#5C4030"/>
+            <path d="M 30 118 Q 62 122 100 120 Q 138 118 168 114 Q 178 110 176 106 L 174 114 Q 155 120 110 122 Q 65 124 38 120 Z" fill="#2D1B14"/>
+            <!-- Broguing detail -->
+            <path d="M 70 95 Q 85 88 100 86 Q 115 84 130 84" stroke="rgba(196,168,130,0.6)" stroke-width="1" fill="none" stroke-dasharray="3,2"/>
+          </svg>
+        </div>
+        <div class="product-info">
+          <p class="product-brand">Luxe Step</p>
+          <h3 class="product-name">Derby Brogue</h3>
+          <div class="product-footer">
+            <span class="product-price">$345.000</span>
+            <button class="add-btn" aria-label="Agregar al carrito">+</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Producto 4 -->
+      <div class="product-card">
+        <div class="product-tag-badge">Exclusivo</div>
+        <div class="product-img-wrap" style="background:#D4C8B0;">
+          <svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg">
+            <!-- Chelsea boot -->
+            <ellipse cx="100" cy="142" rx="68" ry="6" fill="rgba(26,23,20,0.12)"/>
+            <rect x="62" y="40" width="70" height="88" rx="5" fill="#5C3A1E"/>
+            <rect x="67" y="45" width="60" height="80" rx="4" fill="#6B4420"/>
+            <path d="M 62 40 Q 97 35 132 40 L 130 50 Q 97 45 64 50 Z" fill="#7A5230"/>
+            <path d="M 62 128 Q 40 125 33 132 Q 29 140 40 143 Q 62 147 97 147 Q 130 147 148 143 Q 158 140 158 132 Q 158 128 145 128 Z" fill="#4A2E18"/>
+            <path d="M 33 140 Q 65 144 100 144 Q 135 144 158 140 L 158 146 Q 135 150 100 150 Q 60 150 33 146 Z" fill="#2D1B14"/>
+            <!-- Elastic panel -->
+            <rect x="62" y="85" width="12" height="28" rx="2" fill="#8B7355" opacity="0.8"/>
+            <rect x="130" y="85" width="12" height="28" rx="2" fill="#8B7355" opacity="0.8"/>
+          </svg>
+        </div>
+        <div class="product-info">
+          <p class="product-brand">Luxe Step</p>
+          <h3 class="product-name">Chelsea Cognac</h3>
+          <div class="product-footer">
+            <span class="product-price">$425.000</span>
+            <button class="add-btn" aria-label="Agregar al carrito">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MARCAS -->
+  <section id="marcas">
+    <div class="marcas-inner">
+      <span class="marca-name">Florentino</span>
+      <span class="marca-name">Vélez</span>
+      <span class="marca-name">Martinelli</span>
+      <span class="marca-name">Ermenegildo</span>
+      <span class="marca-name">Bally</span>
+    </div>
+  </section>
+
+  <!-- FILOSOFÍA -->
+  <section id="filosofia">
+    <div class="filo-left">
+      <span class="section-label">Nuestra esencia</span>
+      <h2 class="filo-title">
+        No vendemos zapatos.<br />
+        Vendemos <em>confianza</em><br />
+        en cada pisada.
+      </h2>
+      <p class="filo-body">
+        Desde 2018 seleccionamos solo materiales que envejecen con gracia: cueros plena flor curtidos en Europa, suelas cosidas a mano, hormas diseñadas para el pie latinoamericano. Cada par pasa por 38 puntos de control antes de llegar a tus manos.
+      </p>
+      <a href="#" class="filo-link">Conocer nuestra historia →</a>
+    </div>
+    <div class="filo-right">
+      <div class="filo-pattern"></div>
+      <div class="filo-numbers">
+        <div class="filo-num">
+          <span class="big">38</span>
+          <span class="small">Puntos de control</span>
+        </div>
+        <div class="filo-num">
+          <span class="big">8</span>
+          <span class="small">Años de experiencia</span>
+        </div>
+        <div class="filo-num">
+          <span class="big">100%</span>
+          <span class="small">Cuero genuino</span>
+        </div>
+        <div class="filo-num">
+          <span class="big">4.9★</span>
+          <span class="small">Calificación media</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIOS -->
+  <section id="testimonios">
+    <span class="section-label">Lo que dicen</span>
+    <h2 class="section-title">Clientes que<br/>confían en Luxe Step</h2>
+    <div class="testimonios-grid">
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"Los mejores zapatos que he comprado en Colombia. El cuero es impresionante y la horma es perfecta. Llevo 6 meses usándolos a diario y están mejor que el primer día."</p>
+        <span class="testi-author">— Andrés M., Bogotá</span>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"Recibí mi pedido en 48 horas y la caja llegó perfecta. Los mocasines Milán son exactamente como en las fotos, quizás mejor. Sin duda compro de nuevo."</p>
+        <span class="testi-author">— Valentina R., Medellín</span>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"Pedí una talla equivocada y el cambio fue facilísimo. La atención al cliente es excepcional. Y los Chelsea boots son simplemente hermosos."</p>
+        <span class="testi-author">— Felipe G., Cali</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER -->
+  <section id="newsletter">
+    <div>
+      <h2 class="newsletter-title">Sé el primero en ver<br/>lo <em>nuevo.</em></h2>
+      <p class="newsletter-sub">Acceso anticipado a colecciones, descuentos exclusivos y guías de cuidado del cuero directamente en tu bandeja.</p>
+    </div>
+    <div>
+      <div class="newsletter-form">
+        <input type="email" class="newsletter-input" placeholder="tu@correo.com" aria-label="Correo electrónico" />
+        <button class="newsletter-btn">Suscribirme</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand">LUXE<span>.</span>STEP</div>
+        <p class="footer-desc">Calzado de autor para quienes valoran la artesanía real. Cuero genuino, diseño sin tiempo, entrega en toda Colombia.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Tienda</h4>
+        <ul>
+          <li><a href="#">Clásicos Oxford</a></li>
+          <li><a href="#">Stilettos</a></li>
+          <li><a href="#">Botines</a></li>
+          <li><a href="#">Colección Hombre</a></li>
+          <li><a href="#">Colección Mujer</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Ayuda</h4>
+        <ul>
+          <li><a href="#">Guía de tallas</a></li>
+          <li><a href="#">Envíos y devoluciones</a></li>
+          <li><a href="#">Garantía</a></li>
+          <li><a href="#">Cuidado del cuero</a></li>
+          <li><a href="#">Preguntas frecuentes</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contacto</h4>
+        <ul>
+          <li><a href="#">hola@luxestep.co</a></li>
+          <li><a href="#">+57 300 000 0000</a></li>
+          <li><a href="#">Lun–Vie 8am–6pm</a></li>
+          <li><a href="#">WhatsApp</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Luxe Step. Todos los derechos reservados.</span>
+      <div class="footer-social">
+        <a href="#">Instagram</a>
+        <a href="#">TikTok</a>
+        <a href="#">Facebook</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Navbar scroll effect
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 40);
+    });
+
+    // Add to cart interaction
+    document.querySelectorAll('.add-btn').forEach(btn => {
+      btn.addEventListener('click', function () {
+        const original = this.textContent;
+        this.textContent = '✓';
+        this.style.background = '#9B7B4F';
+        this.style.color = '#fff';
+        this.style.borderColor = '#9B7B4F';
+        setTimeout(() => {
+          this.textContent = original;
+          this.style.background = '';
+          this.style.color = '';
+          this.style.borderColor = '';
+        }, 1400);
+      });
+    });
+
+    // Newsletter submit
+    document.querySelector('.newsletter-btn').addEventListener('click', function () {
+      const input = document.querySelector('.newsletter-input');
+      if (input.value.includes('@')) {
+        this.textContent = '¡Listo! ✓';
+        this.style.background = '#1A1714';
+        this.style.borderColor = '#1A1714';
+        input.value = '';
+        setTimeout(() => {
+          this.textContent = 'Suscribirme';
+          this.style.background = '';
+          this.style.borderColor = '';
+        }, 3000);
+      } else {
+        input.style.borderColor = '#9B3A5C';
+        setTimeout(() => { input.style.borderColor = ''; }, 1500);
+      }
+    });
+
+    // Scroll reveal
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.style.opacity = '1';
+          e.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.product-card, .col-card, .testi-card').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(28px)';
+      el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+      observer.observe(el);
+    });
+  </script>
+</body>
+</html>
