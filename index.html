@@ -489,14 +489,9 @@
     .product-card {
       background: var(--white);
       position: relative;
-      transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease);
-    }
-    .product-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 24px 50px rgba(23,19,15,0.1);
+      transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease), opacity 0.3s;
     }
     .product-card.hiding { opacity: 0; transform: scale(0.94); }
-    .product-card { transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease), opacity 0.3s; }
 
     .product-badge {
       position: absolute; top: 0.9rem; left: 0.9rem;
@@ -517,8 +512,10 @@
       width: 68%; max-width: 210px; height: auto;
       transition: transform 0.55s var(--ease);
     }
-    .product-card:hover .product-img svg {
-      transform: translateY(-8px) rotate(-4deg) scale(1.04);
+    .product-img img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.55s var(--ease);
     }
 
     .quick-add {
@@ -533,8 +530,32 @@
       transform: translateY(101%);
       transition: transform 0.35s var(--ease), background 0.25s;
     }
-    .product-card:hover .quick-add { transform: translateY(0); }
     .quick-add:hover { background: var(--bronze); }
+
+    /* Efectos hover SOLO en dispositivos con mouse (evita saltos en táctil) */
+    @media (hover: hover) and (pointer: fine) {
+      .product-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 24px 50px rgba(23,19,15,0.1);
+      }
+      .product-card:hover .product-img svg {
+        transform: translateY(-8px) rotate(-4deg) scale(1.04);
+      }
+      .product-card:hover .product-img img {
+        transform: scale(1.05);
+      }
+      .product-card:hover .quick-add { transform: translateY(0); }
+    }
+
+    /* En pantallas táctiles el botón queda siempre visible, sin animación */
+    @media (hover: none), (pointer: coarse) {
+      .quick-add {
+        position: static;
+        transform: none;
+        width: 100%;
+        display: block;
+      }
+    }
 
     .product-info { padding: 1.3rem 1.3rem 1.6rem; }
     .product-cat {
@@ -1386,7 +1407,7 @@
     </div>
     <div class="promo-code reveal" id="promoCode" title="Clic para copiar">
       <div class="promo-code-label">Código promocional</div>
-      <div class="promo-code-value">LUXE10</div>
+      <div class="promo-code-value">NAJAR10</div>
     </div>
   </section>
 
@@ -1484,7 +1505,6 @@
 
   <!-- NEWSLETTER -->
   <section id="newsletter">
-    <div class="container" style="display:contents;"></div>
     <div style="padding: clamp(3.5rem,7vw,5.5rem) 0 clamp(3.5rem,7vw,5.5rem) clamp(1.5rem,6vw,6.5rem);">
       <h2 class="newsletter-title reveal">Sé el primero en ver lo <em>nuevo.</em></h2>
       <p class="newsletter-sub reveal">Acceso anticipado a colecciones, descuentos exclusivos y guías de cuidado del cuero, directo a tu correo.</p>
@@ -1502,7 +1522,7 @@
   <footer>
     <div class="footer-top">
       <div>
-        <div class="footer-brand">LUXE<span>.</span>STEP</div>
+        <div class="footer-brand">NAJAR<span>.</span>SHOES</div>
         <p class="footer-desc">Calzado de autor para quienes valoran la artesanía real. Cuero genuino, diseño sin tiempo, entrega en toda Colombia.</p>
       </div>
       <div class="footer-col">
@@ -1528,7 +1548,7 @@
       <div class="footer-col">
         <h4>Contacto</h4>
         <ul>
-          <li><a href="mailto:hola@luxestep.co">hola@luxestep.co</a></li>
+          <li><a href="mailto:hola@najarshoes.co">hola@najarshoes.co</a></li>
           <li><a href="tel:+573000000000">+57 300 000 0000</a></li>
           <li><a href="#">Lun–Vie 8am–6pm</a></li>
           <li><a href="https://wa.me/573000000000">WhatsApp</a></li>
@@ -1536,7 +1556,7 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© 2026 Luxe Step. Todos los derechos reservados.</span>
+      <span>© 2026 Najar Shoes. Todos los derechos reservados.</span>
       <div class="footer-social">
         <a href="#">Instagram</a>
         <a href="#">TikTok</a>
@@ -1636,9 +1656,9 @@
 
     /* ── Código promo ── */
     document.getElementById('promoCode').addEventListener('click', () => {
-      navigator.clipboard?.writeText('LUXE10')
-        .then(() => showToast('Código LUXE10 copiado'))
-        .catch(() => showToast('Código: LUXE10'));
+      navigator.clipboard?.writeText('NAJAR10')
+        .then(() => showToast('Código NAJAR10 copiado'))
+        .catch(() => showToast('Código: NAJAR10'));
     });
 
     /* ── Testimonios slider ── */
